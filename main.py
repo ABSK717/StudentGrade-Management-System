@@ -1,12 +1,14 @@
 import json
 import os
 
+DATA_FILE = "student_records.json"
+
 def student_record():
-    if not os.path.exists('StudentGrade-Management-System\student_records.json'):
-        with open('StudentGrade-Management-System\student_records.json', 'w') as file:
+    if not os.path.exists(DATA_FILE):
+        with open(DATA_FILE, 'w') as file:
             json.dump({}, file)
 
-    with open('StudentGrade-Management-System\student_records.json', 'r') as file:
+    with open(DATA_FILE, 'r') as file:
         data = json.load(file)
     return data
 
@@ -21,7 +23,7 @@ def add_student_record(student_id, name, age, student_class, physics_marks, chem
         'chemistry_marks': chemistry_marks,
         'mathematics_marks': mathematics_marks
     }
-    with open('StudentGrade-Management-System\student_records.json', 'w') as file:
+    with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
 def update_student_record(student_id, name=None, age=None, student_class=None, physics_marks=None, chemistry_marks=None, mathematics_marks=None):
@@ -40,7 +42,7 @@ def update_student_record(student_id, name=None, age=None, student_class=None, p
             data[student_id]['chemistry_marks'] = chemistry_marks
         if mathematics_marks is not None:
             data[student_id]['mathematics_marks'] = mathematics_marks
-    with open('StudentGrade-Management-System\student_records.json', 'w') as file:
+    with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
 def delete_student_record(student_id):
@@ -48,7 +50,7 @@ def delete_student_record(student_id):
     data = student_record()
     if student_id in data:
         del data[student_id]
-    with open('StudentGrade-Management-System\student_records.json', 'w') as file:
+    with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
 
